@@ -1,8 +1,11 @@
 'use client'
 
-import {Input} from "./components/Input";
+import Input from "./components/Input";
 import { useState } from 'react'
 import Image from 'next/image'
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+
 
 export default function Home() {
   const axios = require('axios');
@@ -11,9 +14,9 @@ export default function Home() {
   const [synonyms, setSynonyms] = useState([]);
   const [error, setError] = useState<boolean>(false);
   
-  const childToParent = (childdata: any) => {
+  const childToParent = (childdata: string) => {
     setData(childdata);
-
+    console.log(childdata.length);
     setDefinitions([])
     setSynonyms([])
 
@@ -73,6 +76,15 @@ export default function Home() {
           </section>
       </>
       :data.length > 0 && error ? <span className="text-base font-bold flex justify-center">Palavra não encontrada, tente novamente! </span> : ''}
+
+
+      {
+        error && data.length == 0 ?
+          <Stack className="absolute bottom-10" sx={{ width: '528px' }} spacing={2}>
+            <Alert  severity="error" onClose={() =>  setError(false)}>Campo vazio, por favor digite algo</Alert>
+          </Stack>
+        :""
+      }
 
 
 

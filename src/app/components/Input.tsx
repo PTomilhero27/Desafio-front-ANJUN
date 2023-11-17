@@ -6,7 +6,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 
-export const Input = forwardRef<HTMLInputElement, InputProps >(({childToParent ,type="text", ...props}, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps >(({childToParent ,type="text", ...props}, ref) => {
 
   const [valor, setValor] = useState('');
   const handleChange = (event: any) => {
@@ -39,3 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps >(({childToParent ,
     </div>
   )
 })
+
+Input.displayName = 'Input';
+
+export default Input;
